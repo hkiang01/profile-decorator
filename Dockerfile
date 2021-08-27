@@ -1,9 +1,5 @@
-FROM tiangolo/uvicorn-gunicorn:python3.8 as uvicorn-gunicorn
-
 # https://hub.docker.com/r/tiangolo/uvicorn-gunicorn-fastapi
-WORKDIR /app
-RUN pip install --no-cache-dir "uvicorn[standard]>=0.15.0,<0.16.0" "gunicorn>=20.1.0,<20.2.0" "fastapi>=0.68.1,<0.69.0"
-
+FROM tiangolo/uvicorn-gunicorn:python3.8 as uvicorn-gunicorn
 FROM python:3.9
 WORKDIR /app
 COPY --from=uvicorn-gunicorn /start.sh /gunicorn_conf.py /start-reload.sh /
