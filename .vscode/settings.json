@@ -1,4 +1,6 @@
 {
+    "terminal.integrated.defaultProfile.linux": "poetry",
+    "terminal.integrated.defaultProfile.osx": "poetry",
     "terminal.integrated.profiles.linux": {
         "poetry": {
             "path": "poetry",
@@ -7,5 +9,12 @@
             ]
         }
     },
-    "terminal.integrated.defaultProfile.linux": "poetry"
+    "terminal.integrated.profiles.osx": {
+        "poetry": {
+            "path": "poetry",
+            "args": [
+                "shell"
+            ]
+        }
+    }
 }
