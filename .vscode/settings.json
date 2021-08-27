@@ -1,0 +1,11 @@
+{
+    "terminal.integrated.profiles.linux": {
+        "poetry": {
+            "path": "poetry",
+            "args": [
+                "shell"
+            ]
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "poetry"
+}
