@@ -4,13 +4,8 @@ app = FastAPI()
 
 
 @app.get("/")
-def read_root(thing: int):
+def read_root():
     """[summary]
-
-    Parameters
-    ----------
-    thing : str
-        [description]
 
     Returns
     -------

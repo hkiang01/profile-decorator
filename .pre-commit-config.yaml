@@ -94,3 +94,10 @@ repos:
   rev: v0.1.7
   hooks:
   - id: format-ipy-cells
+- repo: https://github.com/terrencepreilly/darglint
+  rev: v1.8.0
+  hooks:
+  - id: darglint
+    args:
+      - --docstring-style
+      - numpy
