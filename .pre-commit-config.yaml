@@ -1,0 +1,96 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.3.0
+  hooks:
+  - id: check-ast
+  - id: check-case-conflict
+  - id: check-docstring-first
+  - id: check-executables-have-shebangs
+  - id: check-json
+  - id: check-merge-conflict
+  - id: check-toml
+  - id: check-xml
+  - id: check-yaml
+  - id: debug-statements
+  - id: end-of-file-fixer
+  - id: name-tests-test
+  - id: trailing-whitespace
+- repo: https://github.com/asottile/blacken-docs
+  rev: v1.10.0
+  hooks:
+  - id: blacken-docs
+# - repo: https://github.com/asottile/dead
+#   rev: v1.4.0
+#   hooks:
+#   - id: dead
+#     exclude: |
+#               (?x)^(
+#                   scripts/get-poetry.py
+#               )$
+- repo: https://github.com/asottile/setup-cfg-fmt
+  rev: v1.17.0
+  hooks:
+  - id: setup-cfg-fmt
+# no license
+# - repo: https://github.com/jstewmon/check-swagger
+#   rev: v0.1.4
+#   hooks:
+#   - id: check-swagger
+- repo: https://github.com/psf/black
+  rev: 19.3b0
+  hooks:
+  - id: black
+- repo: https://github.com/IamTheFij/docker-pre-commit
+  rev: v2.0.1
+  hooks:
+  - id: docker-compose-check
+  - id: hadolint
+- repo: https://github.com/PyCQA/flake8
+  rev: 3.9.2
+  hooks:
+  - id: flake8
+    exclude: |
+              (?x)^(
+                  scripts/get-poetry.py
+              )$
+# - repo: https://github.com/PyCQA/bandit
+#   rev: 1.7.0
+#   hooks:
+#   - id: bandit
+- repo: https://github.com/PyCQA/isort
+  rev: 5.9.3
+  hooks:
+  - id: isort
+- repo: https://github.com/motet-a/jinjalint
+  rev: 01e0a4d
+  hooks:
+  - id: jinjalint
+# no license
+# - repo: https://gitlab.com/smop/pre-commit-hooks
+#   rev: v1.0.0
+#   hooks:
+#   - id: check-poetry
+#   - id: check-gitlab-ci
+# requires ruby
+# - repo: https://github.com/markdownlint/markdownlint
+#   rev: v0.11.0
+#   hooks:
+#   - id: markdownlint
+# BSD 3-Clause "New" or "Revised" License
+- repo: https://github.com/snok/pep585-upgrade
+  rev: ab1595e
+  hooks:
+  - id: upgrade-type-hints
+# requires installation
+# - repo: https://github.com/zricethezav/gitleaks
+#   rev: v7.5.0
+#   hooks:
+#   - id: gitleaks
+- repo: https://github.com/tox-dev/tox-ini-fmt
+  rev: 0.5.1
+  hooks:
+  - id: tox-ini-fmt
+- repo: https://github.com/janosh/format-ipy-cells
+  rev: v0.1.7
+  hooks:
+  - id: format-ipy-cells
