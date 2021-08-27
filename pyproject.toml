@@ -2,7 +2,7 @@
 name = "app"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Harrison Kiang <hkiang01@gmail.com>"]
 
 [tool.poetry.dependencies]
 fastapi = "~0.68.1"
