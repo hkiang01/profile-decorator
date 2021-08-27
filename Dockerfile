@@ -1,15 +1,12 @@
-FROM python:3.9
+FROM tiangolo/uvicorn-gunicorn:python3.8 as uvicorn-gunicorn
 
 # https://hub.docker.com/r/tiangolo/uvicorn-gunicorn-fastapi
 WORKDIR /app
 RUN pip install --no-cache-dir "uvicorn[standard]>=0.15.0,<0.16.0" "gunicorn>=20.1.0,<20.2.0" "fastapi>=0.68.1,<0.69.0"
 
-# hadolint ignore=DL3022
-COPY --from=tiangolo/uvicorn-gunicorn:python3.8 /start.sh /start.sh
-# hadolint ignore=DL3022
-COPY --from=tiangolo/uvicorn-gunicorn:python3.8 /gunicorn_conf.py /gunicorn_conf.py
-# hadolint ignore=DL3022
-COPY --from=tiangolo/uvicorn-gunicorn:python3.8 /start-reload.sh /start-reload.sh
+FROM python:3.9
+WORKDIR /app
+COPY --from=uvicorn-gunicorn /start.sh /gunicorn_conf.py /start-reload.sh /
 RUN chmod +x /start.sh && \
     chmod +x /start-reload.sh
 
