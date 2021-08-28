@@ -16,5 +16,6 @@
                 "shell"
             ]
         }
-    }
+    },
+    "python.pythonPath": ".venv/bin/python"
 }

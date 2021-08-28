@@ -1,14 +1,23 @@
 # memory-profiler-viz
 
+## Problem/Motivation
 
-## Idea
-Idea: [memory-profiler](https://pypi.org/project/memory-profiler/) vizualized like [jaeger traces](https://github.com/jaegertracing/jaeger-ui/blob/0c1fcd16af842fee63a8fdd061a3cc543701c61b/media/ss_trace.png)
+Find memory leaks in Python code quickly without significant code changes in a quickly digestible manner such that the root cause can be easily diagnosed.
 
-![jaeger traces](https://github.com/jaegertracing/jaeger-ui/blob/0c1fcd16af842fee63a8fdd061a3cc543701c61b/media/ss_trace.png)
+Until open-telemetry [Adds metrics API](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/metrics/api.md#asynchronous-gauge-creation), I want a quick and dirty decorator that will give me the  memory usage of the process in scope before and after a function is run.
 
-- Instead of Service & Operation lines, a file and line number
-- Instead of a time axis that always goes up, a memory access that goes up and down
-- Every new line is the next line of code run
+## Design
+
+The decorate will collect the following information:
+- name of function
+- filepath
+- line number
+- memory usage before function is run
+- timestamp when function is called
+- timestamp when function is finished
+- memory usage after function is run
+
+It will expose this in json or other easily digestble format for reporting purposes.
 
 ## Contributing
 1. Install [Poetry](https://python-poetry.org/docs/):

@@ -20,4 +20,4 @@ COPY ./app ./app
 
 EXPOSE 80
 
-CMD ["/start.sh"]
+CMD ["python", "-m", "gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-c", "./app/gunicorn_conf.py", "app.main:app"]
