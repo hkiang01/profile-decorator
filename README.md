@@ -8,7 +8,7 @@ Until open-telemetry [Adds metrics API](https://github.com/open-telemetry/opente
 
 ## Design
 
-The decorate will collect the following information:
+The decorator will collect the following information:
 - name of function
 - filepath
 - line number
