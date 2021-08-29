@@ -8,24 +8,22 @@ RUN chmod +x /start.sh && \
 
 # install app dependencies via poetry
 ARG POETRY_VERSION=1.1.8
-COPY scripts/get-poetry.py ${WORKDIR}/scripts/get-poetry.py
+COPY test_app/scripts/get-poetry.py ${WORKDIR}/scripts/get-poetry.py
 RUN python "${WORKDIR}"/scripts/get-poetry.py --version=${POETRY_VERSION}
 ENV PATH="${PATH}:/root/.poetry/bin"
 RUN poetry config virtualenvs.create false
 
-# build package
-COPY ./profile-decorator /app/profile-decorator/
-WORKDIR /app/profile-decorator/
-RUN poetry build
+# install package
+COPY poetry.lock pyproject.toml README.md ./
+COPY ./profile_decorator ./profile_decorator
+RUN poetry install --no-dev
 
-# install test app dependencies
+# set up test app
+COPY ./test_app /app/test_app
+WORKDIR /app/test_app
+RUN poetry install --no-dev --no-root
 WORKDIR /app
-COPY pyproject.toml poetry.lock ./
-RUN poetry install --no-dev --no-ansi
-
-# test app files
-COPY ./test_app ./app
 
 EXPOSE 80
 
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-c", "./app/gunicorn_conf.py", "app.main:app"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-c", "./test_app/gunicorn_conf.py", "test_app.main:app"]

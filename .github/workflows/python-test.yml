@@ -21,6 +21,5 @@ jobs:
         poetry-version: ${{ matrix.poetry-version }}
     - name: Install package and run test
       run: |
-        cd profile-decorator
         poetry install
         poetry run pytest --cov-report term-missing --cov=profile_decorator tests/
