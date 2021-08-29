@@ -1,9 +1,12 @@
 from fastapi import FastAPI
 
+from app.profile_memory import profile_memory
+
 app = FastAPI()
 
 
 @app.get("/")
+@profile_memory
 def read_root():
     """[summary]
 
