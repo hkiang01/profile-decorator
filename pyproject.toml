@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "profile-decorator"
 version = "0.1.0"
-description = ""
+description = "A simple decorator to profile memory usage in production apps"
 license = "MIT"
 authors = ["Harrison Kiang <hkiang01@gmail.com>"]
 maintainers = ["Harrison Kiang <hkiang01@gmail.com>"]
@@ -39,10 +39,13 @@ exclude = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6,<4"
+python = ">=3.6.2,<4"
 psutil = ">=4.0.0"
 
 [tool.poetry.dev-dependencies]
+black = "^21.7b0"
+flake8 = "^3.9.2"
+pre-commit = "~2.14.0"
 pytest = "^5.2"
 pytest-cov = "^2.12.1"
 
