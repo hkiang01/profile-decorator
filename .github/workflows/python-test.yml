@@ -24,4 +24,4 @@ jobs:
       run: |
         cd profile-decorator
         poetry add ./
-        pytest
+        poetry run pytest
