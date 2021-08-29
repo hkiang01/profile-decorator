@@ -4,7 +4,7 @@
 
 Find memory leaks in Python code quickly without significant code changes in a quickly digestible manner such that the root cause can be easily diagnosed.
 
-Until open-telemetry [Adds metrics API](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/metrics/api.md#asynchronous-gauge-creation), I want a quick and dirty decorator that will give me the  memory usage of the process in scope before and after a function is run.
+Until open-telemetry [Adds metrics API](https://github.com/open-telemetry/opentelemetry-python/pull/1887), I want a quick and dirty decorator that will give me the  memory usage of the process in scope before and after a function is run.
 
 ## Design
 
