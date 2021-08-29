@@ -19,7 +19,7 @@ WORKDIR /app/profile-decorator/
 RUN poetry build
 
 # install test app dependencies
-WORKDIR /app/
+WORKDIR /app
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-dev --no-ansi
 

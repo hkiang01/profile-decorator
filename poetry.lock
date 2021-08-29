@@ -945,7 +945,7 @@ pre-commit = [
     {file = "pre_commit-2.14.1.tar.gz", hash = "sha256:7977a3103927932d4823178cbe4719ab55bb336f42a9f3bb2776cff99007a117"},
 ]
 profile-decorator = [
-    {file = "profile_decorator-0.1.0-py3-none-any.whl", hash = "sha256:3eef3e0d646eda6e643c7bae13a2a18749ca2d34824cb2b6481cb11a9ced9f03"},
+    {file = "profile_decorator-0.1.0-py3-none-any.whl", hash = "sha256:36089f51c78e7a19526609bc08fbaf3a6834a1d0f7cfa90d204e55c67ebe7421"},
 ]
 prompt-toolkit = [
     {file = "prompt_toolkit-3.0.20-py3-none-any.whl", hash = "sha256:6076e46efae19b1e0ca1ec003ed37a933dc94b4d20f486235d436e64771dcd5c"},

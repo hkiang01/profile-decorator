@@ -9,6 +9,7 @@ Until open-telemetry [Adds metrics API](https://github.com/open-telemetry/opente
 ## Usage
 
 ```python
+# example.py
 from profile_decorator import profile_decorator
 
 profile_decorator.init()
@@ -17,6 +18,35 @@ profile_decorator.init()
 @profile_decorator.profile_memory
 def my_func():
     print("hello, world")
+
+
+if __name__ == "__main__":
+    my_func()
+```
+
+```zsh
+$ poetry run python example.py
+hello, world
+{
+  "start_time": "2021-08-29T13:20:31.435036",
+  "uss_memory_before": 6852608,
+  "end_time": "2021-08-29T13:20:31.435892",
+  "uss_memory_after": 6995968,
+  "lines": [
+    {
+      "filename": "/home/harry/projects/GitHub/hkiang01/profile-decorator/example.py",
+      "lineno": 7,
+      "size": 752,
+      "size_diff": 0
+    },
+    {
+      "filename": "/home/harry/projects/GitHub/hkiang01/profile-decorator/example.py",
+      "lineno": 12,
+      "size": 560,
+      "size_diff": 0
+    }
+  ]
+}
 ```
 
 ## Design
