@@ -15,6 +15,10 @@ RUN poetry config virtualenvs.create false
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-dev --no-ansi
 
+# install profile-decorator
+COPY ./profile-decorator /app/profile-decorator/
+RUN poetry add /app/profile-decorator/
+
 # app files
 COPY ./app ./app
 

@@ -59,7 +59,9 @@ except NameError:
     u = str
 
 SHELL = os.getenv("SHELL", "")
-WINDOWS = sys.platform.startswith("win") or (sys.platform == "cli" and os.name == "nt")
+WINDOWS = sys.platform.startswith("win") or (
+    sys.platform == "cli" and os.name == "nt"
+)
 
 
 FOREGROUND_COLORS = {
@@ -318,7 +320,9 @@ class Installer:
 
     REPOSITORY_URL = "https://github.com/python-poetry/poetry"
     BASE_URL = REPOSITORY_URL + "/releases/download/"
-    FALLBACK_BASE_URL = "https://github.com/sdispater/poetry/releases/download/"
+    FALLBACK_BASE_URL = (
+        "https://github.com/sdispater/poetry/releases/download/"
+    )
 
     def __init__(
         self,
@@ -353,7 +357,9 @@ class Installer:
 
         try:
             self.install(
-                version, upgrade=current_version is not None, file=self._offline_file
+                version,
+                upgrade=current_version is not None,
+                file=self._offline_file,
             )
         except subprocess.CalledProcessError as e:
             print(colorize("error", "An error has occured: {}".format(str(e))))
@@ -378,7 +384,8 @@ class Installer:
         current_version = None
         if os.path.exists(POETRY_LIB):
             with open(
-                os.path.join(POETRY_LIB, "poetry", "__version__.py"), encoding="utf-8"
+                os.path.join(POETRY_LIB, "poetry", "__version__.py"),
+                encoding="utf-8",
             ) as f:
                 version_content = f.read()
 
@@ -427,7 +434,11 @@ class Installer:
         )
 
         if self._version and self._version not in releases:
-            print(colorize("error", "Version {} does not exist.".format(self._version)))
+            print(
+                colorize(
+                    "error", "Version {} does not exist.".format(self._version)
+                )
+            )
 
             return None, None
 
@@ -472,7 +483,8 @@ class Installer:
         current_version = None
         if os.path.exists(POETRY_LIB):
             with open(
-                os.path.join(POETRY_LIB, "poetry", "__version__.py"), encoding="utf-8"
+                os.path.join(POETRY_LIB, "poetry", "__version__.py"),
+                encoding="utf-8",
             ) as f:
                 version_content = f.read()
 
@@ -511,7 +523,8 @@ class Installer:
             print()
 
             uninstall = (
-                input("Are you sure you want to uninstall Poetry? (y/[n]) ") or "n"
+                input("Are you sure you want to uninstall Poetry? (y/[n]) ")
+                or "n"
             )
             if uninstall.lower() not in {"y", "yes"}:
                 return False
@@ -651,7 +664,9 @@ class Installer:
     def extract_lib(self, filename):
         gz = GzipFile(filename, mode="rb")
         try:
-            with tarfile.TarFile(filename, fileobj=gz, format=tarfile.PAX_FORMAT) as f:
+            with tarfile.TarFile(
+                filename, fileobj=gz, format=tarfile.PAX_FORMAT
+            ) as f:
                 f.extractall(POETRY_LIB)
         finally:
             gz.close()
@@ -663,12 +678,16 @@ class Installer:
             allowed_executables += ["py.exe -3", "py.exe -2"]
 
         # \d in regex ensures we can convert to int later
-        version_matcher = re.compile(r"^Python (?P<major>\d+)\.(?P<minor>\d+)\..+$")
+        version_matcher = re.compile(
+            r"^Python (?P<major>\d+)\.(?P<minor>\d+)\..+$"
+        )
         fallback = None
         for executable in allowed_executables:
             try:
                 raw_version = subprocess.check_output(
-                    executable + " --version", stderr=subprocess.STDOUT, shell=True
+                    executable + " --version",
+                    stderr=subprocess.STDOUT,
+                    shell=True,
                 ).decode("utf-8")
             except subprocess.CalledProcessError:
                 continue
@@ -701,14 +720,18 @@ class Installer:
                     u(
                         BAT.format(
                             python_executable=python_executable,
-                            poetry_bin=os.path.join(POETRY_BIN, "poetry").replace(
+                            poetry_bin=os.path.join(
+                                POETRY_BIN, "poetry"
+                            ).replace(
                                 os.environ["USERPROFILE"], "%USERPROFILE%"
                             ),
                         )
                     )
                 )
 
-        with open(os.path.join(POETRY_BIN, "poetry"), "w", encoding="utf-8") as f:
+        with open(
+            os.path.join(POETRY_BIN, "poetry"), "w", encoding="utf-8"
+        ) as f:
             if WINDOWS:
                 python_executable = "python"
 
@@ -718,7 +741,9 @@ class Installer:
         if not WINDOWS:
             # Making the file executable
             st = os.stat(os.path.join(POETRY_BIN, "poetry"))
-            os.chmod(os.path.join(POETRY_BIN, "poetry"), st.st_mode | stat.S_IEXEC)
+            os.chmod(
+                os.path.join(POETRY_BIN, "poetry"), st.st_mode | stat.S_IEXEC
+            )
 
     def make_env(self):
         if WINDOWS:
@@ -778,7 +803,9 @@ class Installer:
                 ["fish", "-c", "echo $fish_user_paths"]
             ).decode("utf-8")
             if POETRY_BIN not in fish_user_paths:
-                cmd = "set -U fish_user_paths {} $fish_user_paths".format(POETRY_BIN)
+                cmd = "set -U fish_user_paths {} $fish_user_paths".format(
+                    POETRY_BIN
+                )
                 set_fish_user_path = ["fish", "-c", "{}".format(cmd)]
                 subprocess.check_output(set_fish_user_path)
         else:
@@ -820,7 +847,9 @@ class Installer:
 
     def get_windows_path_var(self):
         with winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER) as root:
-            with winreg.OpenKey(root, "Environment", 0, winreg.KEY_ALL_ACCESS) as key:
+            with winreg.OpenKey(
+                root, "Environment", 0, winreg.KEY_ALL_ACCESS
+            ) as key:
                 path, _ = winreg.QueryValueEx(key, "PATH")
 
                 return path
@@ -829,7 +858,9 @@ class Installer:
         import ctypes
 
         with winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER) as root:
-            with winreg.OpenKey(root, "Environment", 0, winreg.KEY_ALL_ACCESS) as key:
+            with winreg.OpenKey(
+                root, "Environment", 0, winreg.KEY_ALL_ACCESS
+            ) as key:
                 winreg.SetValueEx(key, "PATH", 0, winreg.REG_EXPAND_SZ, value)
 
         # Tell other processes to update their environment
@@ -933,7 +964,9 @@ class Installer:
 
     def display_pre_message(self):
         if WINDOWS:
-            home = POETRY_BIN.replace(os.getenv("USERPROFILE", ""), "%USERPROFILE%")
+            home = POETRY_BIN.replace(
+                os.getenv("USERPROFILE", ""), "%USERPROFILE%"
+            )
         else:
             home = POETRY_BIN.replace(os.getenv("HOME", ""), "$HOME")
 
@@ -951,11 +984,14 @@ class Installer:
                 kwargs["platform_msg"] = PRE_MESSAGE_WINDOWS
             else:
                 profiles = [
-                    colorize("comment", p.replace(os.getenv("HOME", ""), "$HOME"))
+                    colorize(
+                        "comment", p.replace(os.getenv("HOME", ""), "$HOME")
+                    )
                     for p in self.get_unix_profiles()
                 ]
                 kwargs["platform_msg"] = PRE_MESSAGE_UNIX.format(
-                    rcfiles="\n".join(profiles), plural="s" if len(profiles) > 1 else ""
+                    rcfiles="\n".join(profiles),
+                    plural="s" if len(profiles) > 1 else "",
                 )
 
         print(PRE_MESSAGE.format(**kwargs))
@@ -963,7 +999,9 @@ class Installer:
     def display_pre_uninstall_message(self):
         home_bin = POETRY_BIN
         if WINDOWS:
-            home_bin = home_bin.replace(os.getenv("USERPROFILE", ""), "%USERPROFILE%")
+            home_bin = home_bin.replace(
+                os.getenv("USERPROFILE", ""), "%USERPROFILE%"
+            )
         else:
             home_bin = home_bin.replace(os.getenv("HOME", ""), "$HOME")
 
@@ -995,13 +1033,17 @@ class Installer:
             if not self._modify_path:
                 message = POST_MESSAGE_FISH_NO_MODIFY_PATH
 
-            poetry_home_bin = POETRY_BIN.replace(os.getenv("HOME", ""), "$HOME")
+            poetry_home_bin = POETRY_BIN.replace(
+                os.getenv("HOME", ""), "$HOME"
+            )
         else:
             message = POST_MESSAGE_UNIX
             if not self._modify_path:
                 message = POST_MESSAGE_UNIX_NO_MODIFY_PATH
 
-            poetry_home_bin = POETRY_BIN.replace(os.getenv("HOME", ""), "$HOME")
+            poetry_home_bin = POETRY_BIN.replace(
+                os.getenv("HOME", ""), "$HOME"
+            )
             kwargs["poetry_home_env"] = colorize(
                 "comment", POETRY_ENV.replace(os.getenv("HOME", ""), "$HOME")
             )
@@ -1032,7 +1074,9 @@ def main():
         action="store_true",
         default=False,
     )
-    parser.add_argument("--version", help="install named version", dest="version")
+    parser.add_argument(
+        "--version", help="install named version", dest="version"
+    )
     parser.add_argument(
         "-f",
         "--force",
@@ -1086,7 +1130,8 @@ def main():
 
     installer = Installer(
         version=args.version or os.getenv("POETRY_VERSION"),
-        preview=args.preview or string_to_bool(os.getenv("POETRY_PREVIEW", "0")),
+        preview=args.preview
+        or string_to_bool(os.getenv("POETRY_PREVIEW", "0")),
         force=args.force,
         modify_path=not args.no_modify_path,
         accept_all=args.accept_all

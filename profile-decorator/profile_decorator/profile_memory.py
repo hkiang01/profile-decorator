@@ -59,6 +59,7 @@ def profile_memory(f):
                     }
                 )
         profile["lines"] = lines
+        print(profile)
         return result
 
     return wrapper

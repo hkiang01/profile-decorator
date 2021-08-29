@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-
-from app.profile_memory import profile_memory
+from profile_decorator.profile_memory import profile_memory
 
 app = FastAPI()
 
