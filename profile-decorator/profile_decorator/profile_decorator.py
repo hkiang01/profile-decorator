@@ -1,7 +1,19 @@
 import datetime
+import fnmatch
+import site
 import tracemalloc
 import typing
 from functools import wraps
+from pathlib import Path
+
+from .report import report
+
+site_packages_path = str(Path(site.getsitepackages()[0]).parent.absolute())
+
+
+def init():
+    """Starts tracing Python memory allocations"""
+    tracemalloc.start()
 
 
 def profile_memory(f):
@@ -29,14 +41,12 @@ def profile_memory(f):
         profile["start_time"] = datetime.datetime.isoformat(
             datetime.datetime.now()
         )
-        tracemalloc.start()
         snapshot_before = tracemalloc.take_snapshot()
         result = f(*args, **kwds)
-        snapshot_after = tracemalloc.take_snapshot()
-        tracemalloc.stop()
         profile["end_time"] = datetime.datetime.isoformat(
             datetime.datetime.now()
         )
+        snapshot_after = tracemalloc.take_snapshot()
         snapshot_after = snapshot_after.filter_traces(
             (
                 tracemalloc.Filter(False, __file__),
@@ -50,16 +60,20 @@ def profile_memory(f):
         for stat_diff in comparison:
             frames: tracemalloc.Frame = stat_diff.traceback._frames
             for frame in frames:
-                lines.append(
-                    {
-                        "filename": frame[0],
-                        "lineno": frame[1],
-                        "size": stat_diff.size,
-                        "size_diff": stat_diff.size_diff,
-                    }
-                )
+                filename = frame[0]
+                if not filename.startswith(
+                    site_packages_path
+                ) and not fnmatch.fnmatch(filename, "<*>"):
+                    lines.append(
+                        {
+                            "filename": filename,
+                            "lineno": frame[1],
+                            "size": stat_diff.size,
+                            "size_diff": stat_diff.size_diff,
+                        }
+                    )
         profile["lines"] = lines
-        print(profile)
+        report(profile)
         return result
 
     return wrapper
