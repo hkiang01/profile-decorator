@@ -12,12 +12,19 @@ COPY scripts/get-poetry.py ${WORKDIR}/scripts/get-poetry.py
 RUN python "${WORKDIR}"/scripts/get-poetry.py --version=${POETRY_VERSION}
 ENV PATH="${PATH}:/root/.poetry/bin"
 RUN poetry config virtualenvs.create false
-COPY pyproject.toml poetry.lock ./
+
+# build package
 COPY ./profile-decorator /app/profile-decorator/
+WORKDIR /app/profile-decorator/
+RUN poetry build
+
+# install test app dependencies
+WORKDIR /app/
+COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-dev --no-ansi
 
-# app files
-COPY ./app ./app
+# test app files
+COPY ./test_app ./app
 
 EXPOSE 80
 
