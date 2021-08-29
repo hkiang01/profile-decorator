@@ -9,7 +9,9 @@ Until open-telemetry [Adds metrics API](https://github.com/open-telemetry/opente
 ## Usage
 
 ```python
-from profile_decorator.profile_memory import profile_memory
+from profile_decorator.profile_decorator import init, profile_memory
+
+init()
 
 
 @profile_memory
