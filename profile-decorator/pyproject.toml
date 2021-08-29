@@ -5,6 +5,7 @@ description = ""
 license = "MIT"
 authors = ["Harrison Kiang <hkiang01@gmail.com>"]
 maintainers = ["Harrison Kiang <hkiang01@gmail.com>"]
+readme = "../README.md"
 homepage = "https://github.com/hkiang01/profile-decorator"
 classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
