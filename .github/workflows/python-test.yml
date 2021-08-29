@@ -13,8 +13,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-      with:
-        path: profile-decorator
     - uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
@@ -24,6 +22,6 @@ jobs:
         poetry-version: ${{ matrix.poetry-version }}
     - name: Install package and run test
       run: |
-        ls -al
-        poetry add ./profile-decorator/
+        cd profile-decorator
+        poetry add ./
         pytest
