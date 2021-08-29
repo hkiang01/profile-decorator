@@ -23,6 +23,5 @@ jobs:
     - name: Install package and run test
       run: |
         cd profile-decorator
-        poetry add ./
         poetry install
         poetry show
