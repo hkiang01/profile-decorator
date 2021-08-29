@@ -403,6 +403,19 @@ toml = "*"
 virtualenv = ">=20.0.8"
 
 [[package]]
+name = "profile-decorator"
+version = "0.1.0"
+description = ""
+category = "main"
+optional = false
+python-versions = "^3.9"
+develop = false
+
+[package.source]
+type = "directory"
+url = "profile-decorator"
+
+[[package]]
 name = "prompt-toolkit"
 version = "3.0.20"
 description = "Library for building powerful interactive command lines in Python"
@@ -664,7 +677,7 @@ python-versions = ">=3.6.1"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "de17c455d64f3cca80b2e4fa04822793d75e7857caeda166c081b28d17583d2b"
+content-hash = "8668412e1bb095d0f3284081804c1a824d3a0b2a19946bdfa7c5eba921202aee"
 
 [metadata.files]
 appdirs = [
@@ -824,6 +837,7 @@ pre-commit = [
     {file = "pre_commit-2.14.1-py2.py3-none-any.whl", hash = "sha256:a22d12a02da4d8df314187dfe7a61bda6291d57992060522feed30c8cd658b68"},
     {file = "pre_commit-2.14.1.tar.gz", hash = "sha256:7977a3103927932d4823178cbe4719ab55bb336f42a9f3bb2776cff99007a117"},
 ]
+profile-decorator = []
 prompt-toolkit = [
     {file = "prompt_toolkit-3.0.20-py3-none-any.whl", hash = "sha256:6076e46efae19b1e0ca1ec003ed37a933dc94b4d20f486235d436e64771dcd5c"},
     {file = "prompt_toolkit-3.0.20.tar.gz", hash = "sha256:eb71d5a6b72ce6db177af4a7d4d7085b99756bf656d98ffcc4fecd36850eea6c"},
