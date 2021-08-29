@@ -43,7 +43,7 @@ python = ">=3.6.2,<4"
 psutil = ">=4.0.0"
 
 [tool.poetry.dev-dependencies]
-black = "*"
+black = "^21.7b0"
 flake8 = "^3.9.2"
 pre-commit = "~2.14.0"
 pytest = "^5.2"
