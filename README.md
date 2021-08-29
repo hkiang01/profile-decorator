@@ -1,4 +1,4 @@
-# memory-profiler-viz
+# profile-decorator
 
 ## Problem/Motivation
 
