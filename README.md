@@ -9,12 +9,12 @@ Until open-telemetry [Adds metrics API](https://github.com/open-telemetry/opente
 ## Usage
 
 ```python
-from profile_decorator.profile_decorator import init, profile_memory
+from profile_decorator import profile_decorator
 
-init()
+profile_decorator.init()
 
 
-@profile_memory
+@profile_decorator.profile_memory
 def my_func():
     print("hello, world")
 ```
