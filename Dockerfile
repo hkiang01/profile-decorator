@@ -13,11 +13,8 @@ RUN python "${WORKDIR}"/scripts/get-poetry.py --version=${POETRY_VERSION}
 ENV PATH="${PATH}:/root/.poetry/bin"
 RUN poetry config virtualenvs.create false
 COPY pyproject.toml poetry.lock ./
-RUN poetry install --no-dev --no-ansi
-
-# install profile-decorator
 COPY ./profile-decorator /app/profile-decorator/
-RUN poetry add /app/profile-decorator/
+RUN poetry install --no-dev --no-ansi
 
 # app files
 COPY ./app ./app
