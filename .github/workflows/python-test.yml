@@ -25,5 +25,5 @@ jobs:
     - name: Install package and run test
       run: |
         ls -al
-        poetry add ./
+        poetry add ./profile-decorator/
         pytest
