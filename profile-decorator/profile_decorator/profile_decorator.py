@@ -6,6 +6,8 @@ import typing
 from functools import wraps
 from pathlib import Path
 
+import psutil
+
 from .report import report
 
 site_packages_path = str(Path(site.getsitepackages()[0]).parent.absolute())
@@ -41,12 +43,14 @@ def profile_memory(f):
         profile["start_time"] = datetime.datetime.isoformat(
             datetime.datetime.now()
         )
+        profile["uss_memory_before"] = psutil.Process().memory_full_info().uss
         snapshot_before = tracemalloc.take_snapshot()
         result = f(*args, **kwds)
         profile["end_time"] = datetime.datetime.isoformat(
             datetime.datetime.now()
         )
         snapshot_after = tracemalloc.take_snapshot()
+        profile["uss_memory_after"] = psutil.Process().memory_full_info().uss
         snapshot_after = snapshot_after.filter_traces(
             (
                 tracemalloc.Filter(False, __file__),
