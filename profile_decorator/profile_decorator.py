@@ -1,5 +1,6 @@
 import datetime
 import fnmatch
+import os
 import site
 import tracemalloc
 import typing
@@ -40,6 +41,9 @@ def profile_memory(f):
     @wraps(f)
     def wrapper(*args, **kwds):
         profile = {}
+        profile["function"] = f.__name__
+        profile["file"] = f.__globals__["__file__"]
+        profile["filename"] = os.path.basename(profile["file"])
         profile["start_time"] = datetime.datetime.isoformat(
             datetime.datetime.now()
         )
