@@ -4,6 +4,7 @@ import os
 import site
 import tracemalloc
 import typing
+import uuid
 from functools import wraps
 from pathlib import Path
 
@@ -41,6 +42,7 @@ def profile_memory(f):
     @wraps(f)
     def wrapper(*args, **kwds):
         profile = {}
+        profile["id"] = str(uuid.uuid4())
         profile["function"] = f.__name__
         profile["file"] = f.__globals__["__file__"]
         profile["filename"] = os.path.basename(profile["file"])

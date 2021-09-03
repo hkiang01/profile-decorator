@@ -28,6 +28,7 @@ if __name__ == "__main__":
 $ poetry run python example.py
 hello, world
 {
+  "id": "eac7b07c-0c48-4ffe-923d-00ba426a146c",
   "function": "my_func",
   "file": "/home/harry/projects/GitHub/hkiang01/profile-decorator/example.py",
   "filename": "example.py",
